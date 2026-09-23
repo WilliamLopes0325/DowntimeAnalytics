@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downtime Analytics</title>
+    
+    <style>
+    /* COLE TODO O style.css AQUI */
+    body{
+
+    margin:0;
+
+    font-family:Segoe UI;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.55)
+        ),
+        url("img/background.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    min-height:100vh;
+}
+/* ==========================================================================
+   HEADER / BANNER DO TOPO (Substitua os blocos antigos por este único)
+   ========================================================================== */
+header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 140px;
+    overflow: hidden;
+}
+
+
+.banner-topo img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+.banner-topo{
+    position:relative;
+}
+
+.banner-topo h1{
+    position:absolute !important;
+    top:50%;
+    left:40px !important;
+
+    transform:translateY(-50%) !important;
+
+    color:#ffffff !important;
+
+    font-size:42px;
+    font-weight:bold;
+    z-index:999;
+
+    text-shadow:
+        0 0 5px #4fc3ff,
+        0 0 10px #4fc3ff,
+        0 0 20px #0099ff !important;
+}
+
+header h1{
+
+    font-size:42px;
+
+    margin:0;
+
+    color:white;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    text-shadow:
+        0 0 10px #00d4ff,
+        0 0 20px #00d4ff;
+}
+.container{
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+}
+
+.filtros{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:20px; /* novo */
+
+    margin-bottom:30px;
+}
+.cards{
+
+    position:relative;
+
+    top:8px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    gap:25px;
+
+    flex-wrap:nowrap;
+}
+
+
+input,
+button{
+
+    padding:10px;
+
+    border-radius:8px;
+
+    border:none;
+}
+
+button{
+
+    background:#00cfff;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.card{
+
+    background: rgba(8,43,85,0.9);
+
+    backdrop-filter: blur(5px);
+
+    border:2px solid #00d4ff;
+
+    border-radius:15px;
+
+    width:280px;
+
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:0 0 15px #00d4ff;
+
+    position:relative;
+
+    cursor:pointer;
+
+    transition:all .3s ease;
+
+}
+
+
+.rank{
+    font-size: 28px;
+    font-weight: bold;
+    color: #00ff99;
+    letter-spacing: 2px;
+}
+
+.descricao {
+
+    color: white;
+
+    font-size: 26px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-top: 18px;
+
+    margin-bottom: 18px;
+}
+
+.valor{
+
+    margin-top:15px;
+
+    font-size:42px;
+
+    font-weight:bold;
+
+    color:#00ff9d;
+}
+
+.grafico{
+
+    width: 700px;
+
+    min-height: 280px;
+
+    margin: 20px auto;
+
+    background: rgba(8,43,85,0.90);
+
+    border: 2px solid #00d4ff;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 0 12px #00d4ff;
+}
+
+
+#detalhesLinha{
+
+    max-width: 950px;
+
+    margin: 20px auto;
+
+    background: rgba(8,43,85,0.95);
+
+    border: 2px solid #00e5ff;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 0 12px #00d4ff,
+        0 0 25px rgba(0,212,255,.4);
+}
+
+#detalhesLinha h2{
+
+    text-align: center !important;
+
+    color: white;
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+    0 0 8px #00d4ff,
+    0 0 15px #00d4ff,
+    0 0 25px rgba(0,212,255,.5);
+}
+
+.tabelaDetalhes {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+.tabelaDetalhes th:nth-child(1),
+.tabelaDetalhes td:nth-child(1) {
+    width: 10%;
+    text-align: center;
+}
+
+.tabelaDetalhes th:nth-child(2),
+.tabelaDetalhes td:nth-child(2) {
+    width: 8%;
+    text-align: center;
+}
+
+.tabelaDetalhes th:nth-child(3),
+.tabelaDetalhes td:nth-child(3) {
+    width: 8%;
+    text-align: center;
+}
+
+.tabelaDetalhes th:nth-child(4),
+.tabelaDetalhes td:nth-child(4) {
+    width: 15%;
+    text-align: center;
+}
+
+.tabelaDetalhes th:nth-child(5),
+.tabelaDetalhes td:nth-child(5) {
+    width: 39%;
+    text-align: center;
+}
+
+.tabelaDetalhes th:nth-child(6),
+.tabelaDetalhes td:nth-child(6) {
+    width: 20%;
+}
+.tabelaDetalhes td:nth-child(1),
+.tabelaDetalhes td:nth-child(2),
+.tabelaDetalhes td:nth-child(3) {
+
+    text-align: center;
+}
+.tabelaDetalhes td:nth-child(5),
+.tabelaDetalhes td:nth-child(6) {
+
+    text-align: left;
+
+    padding-left: 10px;
+}
+
+.tabelaDetalhes th {
+
+    position: sticky;
+
+    top: 0;
+
+    background: #082b55;
+
+    z-index: 10;
+
+    color: #00ff99;
+
+    font-size: 20px;
+
+    padding: 14px 18px;
+
+    white-space: nowrap;
+
+    text-align: left;
+}
+
+.tabelaDetalhes td{
+    padding: 14px 18px;
+    vertical-align: top;
+    font-size: 18px;
+    line-height: 1.4;
+    color: white;
+}
+
+
+.card:hover{
+
+    transform: scale(1.03);
+
+    box-shadow:
+        0 0 15px #00d4ff,
+        0 0 30px #00d4ff;
+
+}
+.banner-topo{
+    position:relative;
+    text-align:center;
+}
+
+.banner-topo img{
+    width:100%;
+    display:block;
+}
+
+
+input,
+button,
+select{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+}
+#areaGraficoTop3{
+
+    width:320px;
+
+    height:320px;
+
+    margin:0;
+}
+#areaGraficoDetalhes{
+    display:none;
+}
+#graficoDetalhes{
+    height:300px !important;
+}
+.card:nth-child(1){
+
+    border: 2px solid #FFD700;
+
+    box-shadow:
+        0 0 15px #FFD700;
+}
+.card:nth-child(2){
+
+    border: 2px solid #C0C0C0;
+
+    box-shadow:
+        0 0 15px #C0C0C0;
+}
+.card:nth-child(3){
+
+    border: 2px solid #CD7F32;
+
+    box-shadow:
+        0 0 15px #CD7F32;
+}
+#areaTopEventos {
+
+    margin-top: 40px;
+}
+#cardsEventos {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    gap:25px;
+
+    flex-wrap:nowrap;
+}
+#areaTopEventos h2{
+    text-align:center;
+    margin-top:40px;
+    margin-bottom:25px;
+}
+
+.cardEvento {
+
+    width: 280px;
+
+    padding: 20px;
+
+    background: rgba(8,43,85,0.92);
+
+    border-radius: 15px;
+
+    padding: 18px;
+
+    color: white;
+
+    transition: 0.3s;
+
+    cursor: pointer;
+}
+
+.cardEvento:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 0 20px rgba(0,212,255,0.5);
+}
+
+.cardEvento .rank {
+    color: #00ff9d;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+}
+
+.cardEvento .valor {
+
+    color: #00ff9d;
+
+    font-size: 42px;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+#painelEvento {
+
+    position: fixed;
+
+    top: 0;
+    right: -450px;
+
+    width: 450px;
+    height: 100vh;
+
+    background: #082b55;
+
+    box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+
+    transition: 0.4s ease;
+
+    z-index: 9999;
+
+    overflow-y: auto;
+
+    padding: 25px;
+
+    color: white;
+}
+
+#painelEvento.aberto {
+    right: 0;
+}
+.campoEvento {
+    margin-bottom: 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.campoEvento label {
+
+    display: block;
+
+    color: #00ffcc;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+.commentaryBox {
+
+    max-height: 150px;
+
+    overflow-y: auto;
+
+    background: rgba(255,255,255,0.05);
+
+    border-radius: 8px;
+
+    padding: 10px;
+}
+.badge-area {
+
+    display: inline-block;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.frontend {
+    background: #0099ff;
+}
+
+.backend {
+    background: #ff8c00;
+}
+
+.cfc {
+    background: #00c853;
+}
+.cardEvento.gold {
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 20px #FFD700;
+}
+
+.cardEvento.silver {
+    border: 2px solid #C0C0C0;
+    box-shadow: 0 0 20px #C0C0C0;
+}
+
+.cardEvento.bronze {
+    border: 2px solid #CD7F32;
+    box-shadow: 0 0 20px #CD7F32;
+}
+.ocorrencias {
+
+    color: white;
+
+    font-size: 26px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    margin-bottom: 25px;
+}
+#detalhesEventos {
+
+    margin-top: 30px;
+
+    background: rgba(8,43,85,0.95);
+
+    border: 1px solid #00d4ff;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    overflow-x: auto;
+
+    max-height: 650px;
+
+    overflow-y: auto;
+}
+
+#detalhesEventos h2 {
+
+    text-align: center;
+
+    color: white;
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 8px #00d4ff,
+        0 0 15px #00d4ff,
+        0 0 25px rgba(0,212,255,.5);
+}
+.secaoTopLine{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+.secaoTopEventos{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:nowrap;
+
+    width:100%;
+}
+#areaGraficoEventos{
+
+    width:320px;
+
+    height:320px;
+
+    margin:0;
+}
+.tituloSecao{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#00ff9d;
+
+    cursor:pointer;
+
+    margin:20px 0;
+}
+.tituloSecao span{
+
+    font-size:36px;
+
+    width:30px;
+
+    text-align:center;
+}
+.secaoTopUnits {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:20px;
+
+    flex-wrap:nowrap;
+
+    width:100%;
+}
+#areaGraficoUnits {
+
+    width:320px;
+
+    height:320px;
+
+    margin:0;
+}
+.cardUnits:nth-child(1){
+
+    border:2px solid #FFD700;
+
+    box-shadow:0 0 15px #FFD700;
+}
+
+.cardUnits:nth-child(2){
+
+    border:2px solid #C0C0C0;
+
+    box-shadow:0 0 15px #C0C0C0;
+}
+
+.cardUnits:nth-child(3){
+
+    border:2px solid #CD7F32;
+
+    box-shadow:0 0 15px #CD7F32;
+}
+#cardsUnits {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    gap:25px;
+
+    flex-wrap:nowrap;
+}
+
+#detalhesUnits {
+
+    width: 85%;
+
+    margin: 25px auto;
+
+    background: rgba(8,43,85,0.95);
+
+    border: 1px solid #00d4ff;
+
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+#detalhesUnits h2 {
+
+    text-align:center;
+
+    color:#ffffff;
+
+    font-size:32px;
+
+    margin-bottom:20px;
+
+        text-shadow:
+        0 0 8px #00d4ff,
+        0 0 15px #00d4ff,
+        0 0 25px rgba(0,212,255,.5);
+}
+.painelDetalhes {
+
+    margin-top: 30px;
+
+    background: rgba(8,43,85,0.95);
+
+    border: 1px solid #00d4ff;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    overflow-x: auto;
+
+    max-height: 500px;
+
+    overflow-y: auto;
+}
+#cardsUnits .card {
+
+    width:180px;
+
+    padding:15px;
+}
+#detalhesUnits .tabelaDetalhes {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+#detalhesUnits th:nth-child(1),
+#detalhesUnits td:nth-child(1) {
+    width: 10%;
+}
+
+#detalhesUnits th:nth-child(2),
+#detalhesUnits td:nth-child(2) {
+    width: 8%;
+
+    text-align: center;
+}
+
+#detalhesUnits th:nth-child(3),
+#detalhesUnits td:nth-child(3) {
+    width: 8%;
+
+    text-align: center;
+}
+
+#detalhesUnits th:nth-child(4),
+#detalhesUnits td:nth-child(4) {
+
+    width: 14% !important;
+}
+
+/* Units */
+/* Units */
+/* Header */
+#detalhesUnits th:nth-child(5) {
+
+    width: 10%;
+
+    text-align: center;
+
+    color: #00ff9d;
+}
+
+/* Valores */
+#detalhesUnits td:nth-child(5) {
+
+    text-align: center;
+
+    color: #ff5c5c;
+
+    font-weight: bold;
+
+    font-size: 20px;
+
+    text-shadow:
+        0 0 8px rgba(255,0,0,.5);
+}
+
+#detalhesUnits th:nth-child(6),
+#detalhesUnits td:nth-child(6) {
+    width: 30%;
+}
+
+#detalhesUnits th:nth-child(7),
+#detalhesUnits td:nth-child(7) {
+    width: 25%;
+}
+
+#detalhesUnits td:nth-child(6) {
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    line-height: 1.6;
+}
+#detalhesUnits td:nth-child(7) {
+
+    text-align: center;
+
+    vertical-align: middle;
+}
+/* Header Commentary */
+#detalhesUnits th:nth-child(6) {
+
+    text-align: center !important;
+}
+
+/* Header Employee */
+#detalhesUnits th:nth-child(7) {
+
+    text-align: center !important;
+}
+#detalhesUnits td:nth-child(6) {
+
+    text-align: center !important;
+
+    padding-left: 0 !important;
+
+    padding-right: 0 !important;
+
+    vertical-align: middle;
+}
+
+#detalhesUnits td:nth-child(7) {
+
+    text-align: center !important;
+
+    padding-left: 0 !important;
+
+    padding-right: 0 !important;
+
+    vertical-align: middle;
+}
+#areaDashboards{
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+}
+#detalhesUnits th:nth-child(4) {
+
+    width: 13% !important;
+
+    padding-left: 5px !important;
+
+    padding-right: 5px !important;
+}
+
+
+</style>
+
+</head>
+
+<script>
+
+    console.log("SCRIPT CARREGADO");
+
+let grafico = null;
+
+let graficoDetalhes = null;
+
+let topEventosGlobal = [];
+
+let graficoEventos = null;
+
+let graficoUnits = null;
+
+const barPercentagePlugin = {
+
+    id: "barPercentagePlugin",
+
+    afterDatasetsDraw(chart) {
+
+        const { ctx } = chart;
+
+        const dataset =
+            chart.data.datasets[0];
+
+        const total =
+            dataset.data.reduce(
+                (acc, val) => acc + val,
+                0
+            );
+
+        chart.getDatasetMeta(0).data.forEach((bar, index) => {
+
+            const value =
+                dataset.data[index];
+
+            const percent =
+                ((value / total) * 100)
+                .toFixed(0) + "%";
+
+            ctx.save();
+
+            ctx.fillStyle = "#ffffff";
+
+            ctx.strokeStyle = "#000";
+
+            ctx.lineWidth = 3;
+
+            ctx.font = "bold 16px Segoe UI";
+
+            ctx.textAlign = "left";
+
+            ctx.textBaseline = "middle";
+
+            ctx.strokeText(
+                percent,
+                bar.x + 10,
+                bar.y
+            );
+
+            ctx.fillText(
+                percent,
+                bar.x + 10,
+                bar.y
+            );
+
+            ctx.restore();
+        });
+    }
+};
+
+const percentagePlugin = {
+
+    id: "percentagePlugin",
+
+    afterDatasetsDraw(chart) {
+
+        const { ctx } = chart;
+
+        const dataset =
+            chart.data.datasets[0];
+
+        const total =
+            dataset.data.reduce(
+                (acc, val) => acc + val,
+                0
+            );
+
+            const active = chart.getActiveElements();
+
+        chart.getDatasetMeta(0).data.forEach((arc, index) => {
+
+    const isHovered =
+        active.some(
+            element =>
+                element.index === index
+        );
+
+    if (isHovered) {
+        return;
+    }
+
+            const value =
+                dataset.data[index];
+
+            const percentage =
+                ((value / total) * 100)
+                .toFixed(0) + "%";
+
+            const angle =
+    (arc.startAngle + arc.endAngle) / 2;
+
+const radius =
+    (arc.innerRadius + arc.outerRadius) / 2;
+
+const x =
+    arc.x + Math.cos(angle) * radius - 8;
+
+const y =
+    arc.y + Math.sin(angle) * radius;
+
+            ctx.save();
+
+ctx.fillStyle = "#ffffff";
+
+ctx.strokeStyle = "#000000";
+
+ctx.lineWidth = 3;
+
+ctx.font = "bold 20px Segoe UI";
+
+ctx.strokeText(
+    percentage,
+    x,
+    y
+);
+
+ctx.fillText(
+    percentage,
+    x,
+    y
+);
+
+            ctx.restore();
+
+        });
+    }
+};
+
+
+
+// =========================
+// BUSCAR TOP 3
+// =========================
+async function buscarTop3() {
+
+document.getElementById("detalhesLinha").style.display = "none";
+document.getElementById("detalhesLinha").innerHTML = "";
+
+document.getElementById("detalhesEventos").style.display = "none";
+document.getElementById("detalhesEventos").innerHTML = "";
+
+document.getElementById("detalhesUnits").style.display = "none";
+document.getElementById("detalhesUnits").innerHTML = "";
+
+document.getElementById("areaGraficoDetalhes").style.display = "none";
+
+document.getElementById("areaGraficoTop3").style.display = "none";
+document.getElementById("areaGraficoEventos").style.display = "none";
+
+document.getElementById("cards").innerHTML = "";
+document.getElementById("cardsEventos").innerHTML = "";
+
+// recolhe os painéis
+document.getElementById("conteudoTopLine").style.display = "none";
+document.getElementById("iconeTopLine").innerHTML = "+";
+
+document.getElementById("conteudoEventos").style.display = "none";
+document.getElementById("iconeEventos").innerHTML = "+";
+
+document.getElementById("conteudoUnits").style.display = "none";
+document.getElementById("iconeUnits").innerHTML = "+";
+    
+
+    if (grafico) {
+        grafico.destroy();
+    }
+
+    const dataInicial =
+        document.getElementById("dataInicial").value;
+
+    const dataFinal =
+        document.getElementById("dataFinal").value;
+
+    const turno =
+        document.getElementById("turno").value;
+
+    const area =
+    document.getElementById("area").value;
+
+    const arquivo =
+        document.getElementById("arquivoExcel").files[0];
+
+    if (!arquivo) {
+
+        alert("Selecione um arquivo Excel.");
+
+        return;
+    }
+
+    // Lê Excel
+    const dados =
+        await lerExcel();
+
+    // Filtra
+    const dadosFiltrados =
+        filtrarPorDataETurnoEArea(
+            dados,
+            dataInicial,
+            dataFinal,
+            turno,
+            area
+        );
+
+    // Não encontrou registros
+    if (dadosFiltrados.length === 0) {
+
+        document.getElementById("mensagem").innerHTML =
+            "⚠️ Nenhum registro encontrado para os filtros selecionados.";
+
+        return;
+    }
+
+    // Gera Top 3
+    const top3 =
+        gerarTop3(
+            dadosFiltrados
+        );
+
+    const top3Units =
+    gerarTop3Units(
+        dadosFiltrados
+    );
+
+    criarCardsUnits(top3Units);
+
+    criarGraficoUnits(top3Units);
+
+
+    document.getElementById("areaTopUnits")
+    .style.display = "block";
+
+    document.getElementById("areaGraficoUnits")
+    .style.display = "block";
+
+
+
+    const top3Eventos =
+    gerarTop3Eventos(dadosFiltrados);
+
+    topEventosGlobal = top3Eventos;
+
+    criarCardsEventos(top3Eventos);
+
+    document.getElementById("areaGraficoEventos")
+    .style.display = "block";
+
+    criarGraficoEventos(top3Eventos);
+
+
+    if (top3.length === 0) {
+
+        document.getElementById("mensagem").innerHTML =
+            "⚠️ Nenhum downtime encontrado.";
+
+        return;
+    }
+
+    document.getElementById("mensagem").innerHTML = "";
+
+    criarCards(top3);
+
+    criarGrafico(top3);
+
+ document.getElementById("areaGraficoTop3").style.display = "block";
+document.getElementById("areaTopEventos").style.display = "block";
+document.getElementById("areaGraficoEventos").style.display = "block";
+
+// abre automaticamente
+document.getElementById("conteudoTopLine").style.display = "block";
+document.getElementById("iconeTopLine").innerHTML = "-";
+
+document.getElementById("conteudoEventos").style.display = "block";
+document.getElementById("iconeEventos").innerHTML = "-";
+
+document.getElementById("conteudoUnits").style.display = "block";
+document.getElementById("iconeUnits").innerHTML = "-";
+
+document.getElementById("areaDashboards").style.display = "block";
+}
+
+
+// =========================
+// CRIAR CARDS
+// =========================
+function criarCards(dados) {
+
+    let html = "";
+
+    const tops = ["TOP 1 - LINE", "TOP 2 - LINE", "TOP 3 - LINE"];
+
+    dados.forEach((item, index) => {
+
+        html += `
+        <div class="card"
+             onclick="detalharLinha('${item.Line}')">
+
+            <div class="rank">
+                ${tops[index]}
+            </div>
+
+            <div class="descricao">
+                ${item.Line}
+            </div>
+
+            <div class="valor">
+                ${item.Downtime} min
+            </div>
+
+        </div>
+        `;
+    });
+
+    document.getElementById("cards").innerHTML = html;
+}
+
+
+// =========================
+// CRIAR GRÁFICO
+// =========================
+function criarGrafico(dados) {
+
+    const ctx =
+        document.getElementById("graficoTop3");
+
+    if (grafico) {
+        grafico.destroy();
+    }
+
+grafico = new Chart(ctx, {
+
+    type: "doughnut",
+
+    plugins: [percentagePlugin],
+
+    data: {
+
+        labels: dados.map(x => x.Line),
+
+        datasets: [{
+
+            data: dados.map(x => x.Downtime),
+
+            backgroundColor: [
+                "#FFD700",
+                "#C0C0C0",
+                "#CD7F32"
+            ],
+
+            borderColor: "#ffffff",
+
+            borderWidth: 3,
+
+            hoverOffset: 25
+        }]
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        cutout: "78%",
+
+        plugins: {
+
+            legend: {
+
+                position: "bottom",
+
+                labels: {
+
+                    color: "#ffffff",
+
+                    font: {
+                        size: 12,
+                        weight: "bold"
+                    },
+
+                    padding: 15
+                }
+            },
+
+            tooltip: {
+
+                backgroundColor: "#082b55",
+
+                titleColor: "#00ffcc",
+
+                bodyColor: "#ffffff",
+
+                borderColor: "#00d4ff",
+
+                borderWidth: 1
+            }
+        }
+    }
+});
+}
+
+// =========================
+// DETALHES DA LINHA
+// =========================
+async function detalharLinha(linha) {
+
+    console.log("Linha clicada:", linha);
+
+    document.getElementById("detalhesEventos")
+    .style.display = "none";
+
+    document.getElementById("detalhesEventos")
+    .innerHTML = "";
+
+    // Esconde detalhes dos eventos
+    document.getElementById("detalhesEventos")
+    .style.display = "none";
+
+    const dataInicial =
+        document.getElementById("dataInicial").value;
+
+    const dataFinal =
+        document.getElementById("dataFinal").value;
+
+    document.getElementById("areaGraficoDetalhes")
+        .style.display = "block";
+
+    // Fecha detalhes de Units
+    document.getElementById("detalhesUnits")
+    .style.display = "none";
+
+    document.getElementById("detalhesUnits")
+    .innerHTML = "";
+
+    // Lê o Excel local
+    const dados =
+        await lerExcel();
+
+    // Filtra período
+    const turno =
+        document.getElementById("turno").value;
+
+    const area =
+        document.getElementById("area").value;
+
+    const dadosFiltrados =
+        filtrarPorDataETurnoEArea(
+            dados,
+            dataInicial,
+            dataFinal,
+            turno,
+            area
+        );
+
+    // Filtra apenas a linha clicada
+    const linhaDados =
+        dadosFiltrados.filter(
+            item => item.Line === linha
+        );
+
+    const ranking = {};
+
+    linhaDados.forEach(item => {
+
+        const motivo =
+            item.SubOrigin;
+
+        const downtime =
+            Number(item.Downtime || 0);
+
+        ranking[motivo] =
+            (ranking[motivo] || 0)
+            + downtime;
+    });
+
+    const detalhes = Object.entries(ranking)
+
+        .map(([SubOrigin, Downtime]) => ({
+            SubOrigin,
+            Downtime
+        }))
+
+        .sort(
+            (a, b) =>
+                b.Downtime - a.Downtime
+        );
+
+    criarGraficoDetalhes(detalhes);
+
+    let html = `
+        <h2>DETAILS ${linha}</h2>
+
+        <table class="tabelaDetalhes">
+
+            <tr>
+                <th>Motivo</th>
+                <th>Downtime</th>
+            </tr>
+    `;
+
+    detalhes.forEach(item => {
+
+        html += `
+            <tr>
+                <td>${item.SubOrigin}</td>
+                <td>${item.Downtime} min</td>
+            </tr>
+        `;
+    });
+
+    html += `
+        </table>
+    `;
+
+    document.getElementById("detalhesLinha")
+        .style.display = "block";
+
+    document.getElementById("detalhesLinha")
+        .innerHTML = html;
+}
+function criarGraficoDetalhes(dados) {
+
+    const ctx =
+        document.getElementById("graficoDetalhes");
+
+    if (graficoDetalhes) {
+        graficoDetalhes.destroy();
+    }
+
+    graficoDetalhes = new Chart(ctx, {
+
+        type: "bar",
+
+        plugins: [barPercentagePlugin],
+
+        data: {
+
+            labels: dados.map(x => x.SubOrigin),
+
+            datasets: [{
+
+                data: dados.map(x => x.Downtime),
+
+                backgroundColor: "#00ff9d",
+
+                borderRadius: 8,
+
+                borderSkipped: false,
+
+                borderColor: "#ffffff",
+
+                borderWidth: 2,
+
+                barThickness: 18,
+
+                maxBarThickness: 20
+
+            }]
+        },
+
+        options: {
+
+            indexAxis: "y",
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+                    display: false
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    suggestedMax:
+                    Math.max(...dados.map(x => x.Downtime)) * 1.20,
+
+                    ticks: {
+                        color: "white"
+                    },
+
+                    grid: {
+                        color: "rgba(255,255,255,0.1)"
+                    }
+                },
+
+                y: {
+
+                    ticks: {
+                        color: "white"
+                    },
+
+                    grid: {
+                        color: "rgba(255,255,255,0.1)"
+                    }
+                }
+            }
+        }
+    });
+    
+}
+function normalizarSubOrigin(valor) {
+
+    const mapa = {
+        "EXCESSO DE FALHA": "EXCESSO DE FALHAS",
+        "EXCESSO FALHAS": "EXCESSO DE FALHAS",
+        "FALTA ABASTECIMENTO": "FALTA DE ABASTECIMENTO",
+        "TREINAMENTOS": "TREINAMENTO",
+        "TREINAMENTO LINHA": "TREINAMENTO"
+    };
+
+    if (!valor) {
+        return "";
+    }
+
+    valor = valor
+        .toString()
+        .toUpperCase()
+        .trim();
+
+    return mapa[valor] || valor;
+}
+function prepararDados(dados) {
+
+    return dados.map(item => ({
+        ...item,
+
+        SubOrigin:
+            normalizarSubOrigin(item.SubOrigin),
+
+        Line:
+            String(item.Line || "")
+            .toUpperCase()
+            .trim(),
+
+        Shift:
+            String(item.Shift || "")
+            .trim()
+    }));
+}
+function obterArea(line) {
+
+    const linha = String(line || "").toUpperCase();
+
+    if (linha.includes("CFC")) {
+        return "CFC";
+    }
+
+    if (linha.includes("BE")) {
+        return "BACKEND";
+    }
+
+    if (linha.includes("FE")) {
+        return "FRONTEND";
+    }
+
+    return "";
+}
+async function lerExcel() {
+
+    const arquivo =
+        document.getElementById("arquivoExcel").files[0];
+
+    const buffer =
+        await arquivo.arrayBuffer();
+
+    const workbook =
+        XLSX.read(buffer, {
+            type: "array"
+        });
+
+    const sheet =
+        workbook.Sheets[
+            workbook.SheetNames[0]
+        ];
+
+    let dados =
+        XLSX.utils.sheet_to_json(sheet);
+
+    dados = prepararDados(dados);
+
+    return dados;
+}
+function filtrarPorDataETurnoEArea(
+    dados,
+    dataInicial,
+    dataFinal,
+    turno,
+    area
+) {
+
+    const inicio = new Date(dataInicial);
+    const fim = new Date(dataFinal);
+
+    return dados.filter(item => {
+
+        const dataRegistro =
+            new Date(item.Date);
+
+        const dentroPeriodo =
+            dataRegistro >= inicio &&
+            dataRegistro <= fim;
+
+        const turnoValido =
+            !turno ||
+            item.Shift === turno;
+
+        const areaLinha =
+            obterArea(item.Line);
+
+        const areaValida =
+            !area ||
+            areaLinha === area;
+
+        return (
+            dentroPeriodo &&
+            turnoValido &&
+            areaValida
+        );
+    });
+}
+function gerarTop3(dados) {
+
+    const ranking = {};
+
+    dados.forEach(item => {
+
+        const linha = item.Line;
+
+        const downtime =
+            Number(item.Downtime || 0);
+
+        ranking[linha] =
+            (ranking[linha] || 0)
+            + downtime;
+    });
+
+    return Object.entries(ranking)
+
+        .map(([Line, Downtime]) => ({
+            Line,
+            Downtime
+        }))
+
+        .sort((a, b) => {
+
+    if (b.Ocorrencias !== a.Ocorrencias) {
+        return b.Ocorrencias - a.Ocorrencias;
+    }
+
+    return b.Downtime - a.Downtime;
+})
+
+        .slice(0, 3);
+}
+function gerarTop3Eventos(dados) {
+
+    const ranking = {};
+
+    dados.forEach(item => {
+
+        const downtime =
+            Number(item.Downtime || 0);
+
+        if (downtime <= 0) return;
+
+        if (!ranking[downtime]) {
+
+            ranking[downtime] = {
+                Downtime: downtime,
+                Ocorrencias: 0,
+                Registros: []
+            };
+        }
+
+        ranking[downtime].Ocorrencias++;
+
+        ranking[downtime].Registros.push(item);
+
+    });
+
+    return Object.values(ranking)
+
+.sort((a, b) => {
+
+    if (b.Ocorrencias !== a.Ocorrencias) {
+        return b.Ocorrencias - a.Ocorrencias;
+    }
+
+    return b.Downtime - a.Downtime;
+})
+
+        .slice(0, 3);
+}
+function criarCardsEventos(dados) {
+
+    let html = "";
+
+    const tops = ["TOP 1 - EVENTS", "TOP 2 - EVENTS", "TOP 3 - EVENTS"];
+
+    const classes = [
+    "gold",
+    "silver",
+    "bronze"
+];
+
+    dados.forEach((item, index) => {
+
+        html += `
+
+            <div class="cardEvento ${classes[index]}"
+                onclick="mostrarDetalhesEvento(${item.Downtime})">
+
+              <div class="rank">
+                 ${tops[index]}
+            </div>
+
+            <div class="ocorrencias">
+                 ${item.Ocorrencias} Occurrences
+              </div>
+
+             <div class="valor">
+                 ${item.Downtime} min
+             </div>
+
+</div>
+
+`;
+    });
+
+    document.getElementById("cardsEventos").innerHTML = html;
+}
+function mostrarDetalhesEvento(downtime) {
+
+    // Esconde detalhes da linha
+document.getElementById("detalhesLinha")
+    .style.display = "none";
+
+// Esconde gráfico de motivos da linha
+document.getElementById("areaGraficoDetalhes")
+    .style.display = "none";
+
+// Fecha detalhes de Units
+document.getElementById("detalhesUnits")
+    .style.display = "none";
+
+document.getElementById("detalhesUnits")
+    .innerHTML = "";
+
+    const grupo =
+        topEventosGlobal.find(
+            x => x.Downtime === downtime
+        );
+
+    if (!grupo) return;
+
+    grupo.Registros.sort((a, b) => {
+
+    const dataA = new Date(a.Date);
+    const dataB = new Date(b.Date);
+
+    return dataB - dataA; // mais recente primeiro
+});
+
+    let html = `
+
+        <h2>
+            EVENT DETAILS
+            (${downtime} min)
+        </h2>
+
+        <table class="tabelaDetalhes">
+
+            <tr>
+                <th>Data</th>
+                <th>Line</th>
+                <th>Downtime</th>
+                <th>SubOrigin</th>
+                <th>Commentary</th>
+                <th>Employee</th>
+            </tr>
+
+    `;
+
+    grupo.Registros.forEach(item => {
+
+       const partes = (item.Date || "").split("/");
+
+        const dataBR = partes.length === 3? `${partes[1]}/${partes[0]}/${partes[2]}`: "-"; 
+
+        html += `
+
+
+
+            <tr>
+
+                <td>${dataBR}</td>
+
+                <td>${item.Line || "-"}</td>
+
+                <td>${item.Downtime || "-"}</td>
+
+                <td>${item.SubOrigin || "-"}</td>
+
+                <td>${item.Commentary || "-"}</td>
+
+                <td>${item.Employee || "-"}</td>
+
+            </tr>
+
+        `;
+    });
+
+html += "</table>";
+
+const detalhes =
+    document.getElementById("detalhesEventos");
+
+detalhes.style.display = "none";
+
+detalhes.innerHTML = html;
+
+detalhes.style.display = "block";
+
+
+    //document.getElementById("detalhesEventos")
+        //.scrollIntoView({
+        //    behavior: "smooth"
+       // });
+}
+function criarGraficoEventos(dados) {
+
+    const ctx =
+        document.getElementById("graficoEventos");
+
+    if (graficoEventos) {
+        graficoEventos.destroy();
+    }
+
+    graficoEventos = new Chart(ctx, {
+
+        type: "doughnut",
+
+        plugins: [percentagePlugin],
+
+        data: {
+
+            labels: dados.map(
+                x => `${x.Downtime} min`
+            ),
+
+            datasets: [{
+
+                data: dados.map(
+                    x => x.Downtime
+                ),
+
+                backgroundColor: [
+                    "#FFD700",
+                    "#C0C0C0",
+                    "#CD7F32"
+                ],
+
+                borderColor: "#ffffff",
+
+                borderWidth: 3,
+
+                hoverOffset: 25
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            cutout: "78%",
+
+            plugins: {
+
+                legend: {
+
+                    position: "bottom",
+
+                    labels: {
+
+                        color: "#ffffff",
+
+                        font: {
+                            size: 12,
+                            weight: "bold"
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+function toggleTopLine() {
+
+    const area =
+        document.getElementById("conteudoTopLine");
+
+    const icone =
+        document.getElementById("iconeTopLine");
+
+    if (area.style.display === "none") {
+
+        area.style.display = "block";
+
+        icone.innerHTML = "-";
+
+    } else {
+
+        area.style.display = "none";
+
+        icone.innerHTML = "+";
+
+        // Fecha detalhes da linha
+        document.getElementById("detalhesLinha")
+            .style.display = "none";
+
+        document.getElementById("detalhesLinha")
+            .innerHTML = "";
+
+        // Fecha gráfico detalhado
+        document.getElementById("areaGraficoDetalhes")
+            .style.display = "none";
+
+        // Destroi gráfico detalhado
+        if (graficoDetalhes) {
+            graficoDetalhes.destroy();
+            graficoDetalhes = null;
+        }
+    }
+}
+function toggleEventos() {
+
+    const area =
+        document.getElementById("conteudoEventos");
+
+    const icone =
+        document.getElementById("iconeEventos");
+
+    if (area.style.display === "none") {
+
+        area.style.display = "block";
+
+        icone.innerHTML = "-";
+
+    } else {
+
+        area.style.display = "none";
+
+        icone.innerHTML = "+";
+
+        // Fecha detalhes dos eventos
+        document.getElementById("detalhesEventos")
+            .style.display = "none";
+
+        document.getElementById("detalhesEventos")
+            .innerHTML = "";
+    }
+}
+function gerarTop3Units(dados) {
+
+    const ranking = {};
+
+    dados.forEach(item => {
+
+        const linha = item.Line;
+
+        const unidades =
+            Number(item.Unidades || 0);
+
+        ranking[linha] =
+            (ranking[linha] || 0)
+            + unidades;
+    });
+
+    return Object.entries(ranking)
+
+        .map(([Line, Units]) => ({
+            Line,
+            Units
+        }))
+
+        .sort(
+            (a, b) =>
+                b.Units - a.Units
+        )
+
+        .slice(0, 3);
+}
+function criarCardsUnits(dados) {
+
+    let html = "";
+
+    const tops = [
+        "TOP 1 - UNITS",
+        "TOP 2 - UNITS",
+        "TOP 3 - UNITS"
+    ];
+
+    const classes = [
+    "gold",
+    "silver",
+    "bronze"
+];
+
+    dados.forEach((item, index) => {
+
+        html += `
+
+        <div class="cardEvento ${classes[index]}"
+        onclick="mostrarDetalhesUnits('${item.Line}')">
+
+
+            <div class="rank">
+                ${tops[index]}
+            </div>
+
+            <div class="descricao">
+                ${item.Line}
+            </div>
+
+            <div class="valor">
+                ${item.Units.toLocaleString()}
+            </div>
+
+        </div>
+
+        `;
+    });
+
+    document.getElementById("cardsUnits")
+        .innerHTML = html;
+}
+function criarGraficoUnits(dados) {
+
+    const ctx =
+        document.getElementById("graficoUnits");
+
+    if (graficoUnits) {
+        graficoUnits.destroy();
+    }
+
+    graficoUnits = new Chart(ctx, {
+
+        type: "doughnut",
+
+        plugins: [percentagePlugin],
+
+        data: {
+
+            labels: dados.map(
+                x => x.Line
+            ),
+
+datasets: [{
+
+    data: dados.map(
+        x => x.Units
+    ),
+
+    backgroundColor: [
+        "#FFD700",
+        "#C0C0C0",
+        "#CD7F32"
+    ],
+
+    borderColor: "#ffffff",
+
+    borderWidth: 3,
+
+    hoverOffset: 25
+}]
+        },
+        options: {
+
+    responsive: true,
+
+    maintainAspectRatio: false,
+
+    cutout: "78%",
+
+    plugins: {
+
+        legend: {
+
+            position: "bottom",
+
+            labels: {
+
+                color: "#ffffff",
+
+                font: {
+                    size: 12,
+                    weight: "bold"
+                }
+            }
+        }
+    }
+}
+
+    });
+}
+function toggleUnits() {
+
+    const area =
+        document.getElementById("conteudoUnits");
+
+    const icone =
+        document.getElementById("iconeUnits");
+
+    if (area.style.display === "none") {
+
+        area.style.display = "block";
+
+        icone.innerHTML = "-";
+
+    } else {
+
+        area.style.display = "none";
+
+        icone.innerHTML = "+";
+
+        document.getElementById("detalhesUnits")
+            .style.display = "none";
+
+        document.getElementById("detalhesUnits")
+            .innerHTML = "";
+    }
+}
+async function mostrarDetalhesUnits(linha) {
+
+    // Fecha detalhes da linha
+document.getElementById("detalhesLinha")
+    .style.display = "none";
+
+document.getElementById("detalhesLinha")
+    .innerHTML = "";
+
+// Fecha detalhes dos eventos
+document.getElementById("detalhesEventos")
+    .style.display = "none";
+
+document.getElementById("detalhesEventos")
+    .innerHTML = "";
+
+// Fecha gráfico da linha
+document.getElementById("areaGraficoDetalhes")
+    .style.display = "none";
+
+    const dataInicial =
+        document.getElementById("dataInicial").value;
+
+    const dataFinal =
+        document.getElementById("dataFinal").value;
+
+    const turno =
+        document.getElementById("turno").value;
+
+    const area =
+        document.getElementById("area").value;
+
+    const dados =
+        await lerExcel();
+
+    const dadosFiltrados =
+        filtrarPorDataETurnoEArea(
+            dados,
+            dataInicial,
+            dataFinal,
+            turno,
+            area
+        );
+
+    const registros =
+        dadosFiltrados.filter(
+            item => item.Line === linha
+        );
+
+    registros.sort(
+        (a,b) =>
+            Number(b.Unidades || 0)
+            -
+            Number(a.Unidades || 0)
+    );
+
+    let html = `
+
+        <h2>${linha} - LOST UNITS DETAILS</h2>
+
+        <table class="tabelaDetalhes">
+
+            <tr>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Rate</th>
+                <th>Downtime</th>
+                <th>Units</th>
+                <th>Commentary</th>
+                <th>Employee</th>
+            </tr>
+
+    `;
+
+    registros.forEach(item => {
+
+        const partes = (item.Date || "").split("/");
+
+        const dataBR =
+        partes.length === 3
+        ? `${partes[1]}/${partes[0]}/${partes[2]}`
+        : "-";
+
+        html += `
+
+            <tr>
+
+                <td>${dataBR}</td>
+
+                <td>${item.HoraRef || "-"}</td>
+
+                <td>${item.Rate || "-"}</td>
+
+                <td>${item.Downtime || "-"}</td>
+
+                <td>${item.Unidades || "-"}</td>
+
+                <td>${item.Commentary || "-"}</td>
+
+                <td>${item.Employee || "-"}</td>
+
+            </tr>
+
+        `;
+    });
+
+    html += "</table>";
+
+    const detalhes =
+        document.getElementById("detalhesUnits");
+
+    detalhes.innerHTML = html;
+
+    detalhes.style.display = "block";
+    
+    detalhes.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+});
+}
+
+</script>
+
+<body>
+
+<header class="banner-topo">
+    <!-- Adicionado o título principal em texto aqui -->
+    <h1>DOWNTIME ANALYTICS</h1>
+    <img src="img/banner-topo.png"alt="Banner Superior">
+</header>
+
+<div class="container">
+
+<div class="filtros">
+
+    <input type="date" id="dataInicial">
+
+    <input type="date" id="dataFinal">
+
+    <select id="turno">
+        <option value="">Todos os Turnos</option>
+        <option value="1º Turno">1º Turno</option>
+        <option value="2º Turno">2º Turno</option>
+        <option value="3º Turno">3º Turno</option>
+    </select>
+
+    <select id="area">
+    <option value="">Todas Áreas</option>
+    <option value="CFC">CFC</option>
+    <option value="BACKEND">BACKEND</option>
+    <option value="FRONTEND">FRONTEND</option>
+</select>
+
+    <input type="file"
+           id="arquivoExcel"
+           accept=".xlsx,.xls">
+
+    <button onclick="buscarTop3()">
+        Analisar
+    </button>
+
+</div>
+
+<div id="mensagem"></div>
+
+<div id="areaDashboards" style="display:none;">
+
+<div class="tituloSecao"
+     onclick="toggleTopLine()">
+
+    <span id="iconeTopLine">+</span>
+
+    TOP 3 LINE
+</div>
+
+<div id="conteudoTopLine"
+     style="display:none;">
+
+<!-- TOP 3 LINHAS -->
+<div class="secaoTopLine">
+
+    <div id="cards" class="cards"></div>
+
+    <div id="areaGraficoTop3"
+         class="grafico"
+         style="display:none;">
+        <canvas id="graficoTop3"></canvas>
+    </div>
+
+</div>
+
+<!-- DETALHES LINHA -->
+<div id="detalhesLinha"
+     style="display:none;">
+</div>
+
+<div id="areaGraficoDetalhes"
+     class="grafico"
+     style="display:none;">
+    <canvas id="graficoDetalhes"></canvas>
+</div>
+
+</div>
+
+<div class="tituloSecao"
+     onclick="toggleEventos()">
+
+    <span id="iconeEventos">+</span>
+
+    TOP 3 EVENTS
+</div>
+
+<div id="conteudoEventos"
+     style="display:none;">
+
+
+<!-- TOP 3 EVENTOS -->
+<!-- TOP EVENTOS -->
+<div class="secaoTopEventos">
+
+    <div id="areaTopEventos"
+         style="display:none;">
+
+        <div id="cardsEventos"></div>
+
+    </div>
+
+    <div id="areaGraficoEventos"
+         class="grafico"
+         style="display:none;">
+
+        <canvas id="graficoEventos"></canvas>
+
+    </div>
+
+</div>
+
+<div id="detalhesEventos"
+     style="display:none;">
+</div>
+</div>
+
+<div class="tituloSecao"
+     onclick="toggleUnits()">
+
+    <span id="iconeUnits">+</span>
+
+    TOP 3 UNITS LOST
+
+</div>
+
+<div id="conteudoUnits"
+     style="display:none;">
+
+    <div class="secaoTopUnits">
+
+        <div id="areaTopUnits"
+             style="display:none;">
+
+            <div id="cardsUnits"></div>
+
+        </div>
+
+        <div id="areaGraficoUnits"
+             class="grafico"
+             style="display:none;">
+
+            <canvas id="graficoUnits"></canvas>
+
+        </div>
+
+    </div>
+
+    <!-- DETALHES AQUI -->
+
+    <div id="detalhesUnits"
+         style="display:none;">
+    </div>
+
+</div>
+
+</div>
+
+<!-- DETALHES EVENTO -->
+<div id="painelEvento" style="display:none;">
+
+    <h2>Detalhe do Downtime</h2>
+
+    <div id="conteudoEvento"></div>
+
+    <button onclick="fecharPainelEvento()">
+        Fechar
+    </button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downtime Analytics</title>
+    <link rel="stylesheet"href="css/style.css">
+</head>
+
+<body>
+
+<header class="banner-topo">
+    <!-- Adicionado o título principal em texto aqui -->
+    <h1>DOWNTIME ANALYTICS</h1>
+    <img src="img/banner-topo.png"alt="Banner Superior">
+</header>
+
+<div class="container">
+
+<div class="filtros">
+
+    <input type="date" id="dataInicial">
+
+    <input type="date" id="dataFinal">
+
+    <select id="turno">
+        <option value="">Todos os Turnos</option>
+        <option value="1º Turno">1º Turno</option>
+        <option value="2º Turno">2º Turno</option>
+        <option value="3º Turno">3º Turno</option>
+    </select>
+
+    <select id="area">
+    <option value="">Todas Áreas</option>
+    <option value="CFC">CFC</option>
+    <option value="BACKEND">BACKEND</option>
+    <option value="FRONTEND">FRONTEND</option>
+</select>
+
+    <input type="file"
+           id="arquivoExcel"
+           accept=".xlsx,.xls">
+
+    <button onclick="buscarTop3()">
+        Analisar
+    </button>
+
+</div>
+
+<div id="mensagem"></div>
+
+<div id="areaDashboards" style="display:none;">
+
+<div class="tituloSecao"
+     onclick="toggleTopLine()">
+
+    <span id="iconeTopLine">+</span>
+
+    TOP 3 LINE
+</div>
+
+<div id="conteudoTopLine"
+     style="display:none;">
+
+<!-- TOP 3 LINHAS -->
+<div class="secaoTopLine">
+
+    <div id="cards" class="cards"></div>
+
+    <div id="areaGraficoTop3"
+         class="grafico"
+         style="display:none;">
+        <canvas id="graficoTop3"></canvas>
+    </div>
+
+</div>
+
+<!-- DETALHES LINHA -->
+<div id="detalhesLinha"
+     style="display:none;">
+</div>
+
+<div id="areaGraficoDetalhes"
+     class="grafico"
+     style="display:none;">
+    <canvas id="graficoDetalhes"></canvas>
+</div>
+
+</div>
+
+<div class="tituloSecao"
+     onclick="toggleEventos()">
+
+    <span id="iconeEventos">+</span>
+
+    TOP 3 EVENTS
+</div>
+
+<div id="conteudoEventos"
+     style="display:none;">
+
+
+<!-- TOP 3 EVENTOS -->
+<!-- TOP EVENTOS -->
+<div class="secaoTopEventos">
+
+    <div id="areaTopEventos"
+         style="display:none;">
+
+        <div id="cardsEventos"></div>
+
+    </div>
+
+    <div id="areaGraficoEventos"
+         class="grafico"
+         style="display:none;">
+
+        <canvas id="graficoEventos"></canvas>
+
+    </div>
+
+</div>
+
+<div id="detalhesEventos"
+     style="display:none;">
+</div>
+</div>
+
+<div class="tituloSecao"
+     onclick="toggleUnits()">
+
+    <span id="iconeUnits">+</span>
+
+    TOP 3 UNITS LOST
+
+</div>
+
+<div id="conteudoUnits"
+     style="display:none;">
+
+    <div class="secaoTopUnits">
+
+        <div id="areaTopUnits"
+             style="display:none;">
+
+            <div id="cardsUnits"></div>
+
+        </div>
+
+        <div id="areaGraficoUnits"
+             class="grafico"
+             style="display:none;">
+
+            <canvas id="graficoUnits"></canvas>
+
+        </div>
+
+    </div>
+
+    <!-- DETALHES AQUI -->
+
+    <div id="detalhesUnits"
+         style="display:none;">
+    </div>
+
+</div>
+
+</div>
+
+<!-- DETALHES EVENTO -->
+<div id="painelEvento" style="display:none;">
+
+    <h2>Detalhe do Downtime</h2>
+
+    <div id="conteudoEvento"></div>
+
+    <button onclick="fecharPainelEvento()">
+        Fechar
+    </button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
