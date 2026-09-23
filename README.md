@@ -34,16 +34,22 @@ Versão de desenvolvimento modular.
 ## Screenshots
 
 ### Dashboard Principal
-img/dashboard-completo.png
+Page_principal.png
 
 ### Top Lines
-<img srclines.png
+Visualização das linhas com maior tempo de downtime.
+
+TOP_LINE.png
 
 ### Top Events
-img/top-events.png
+Principais eventos responsáveis pelas paradas de produção.
+
+![Top ENTS.png
 
 ### Top Units
-<img src="img/top-units.png"
+Principais unidades perdidas dentro do downtime.
+
+TOP_UNITS.png
 
 ## Autor
 
