@@ -1,5 +1,5 @@
 # DowntimeAnalytics
-Dashboard para análise de downtime, eventos e unidades perdidas.
+Dashboard para análise de downtime, eventos e unidades perdidas dentro de uma linha de produção.
 
 ## Recursos
 
