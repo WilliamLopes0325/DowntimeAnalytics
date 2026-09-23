@@ -31,6 +31,20 @@ Versão portátil para compartilhamento em rede.
 ### index.html
 Versão de desenvolvimento modular.
 
+## Screenshots
+
+### Dashboard Principal
+img/dashboard-completo.png
+
+### Top Lines
+<img srclines.png
+
+### Top Events
+img/top-events.png
+
+### Top Units
+<img src="img/top-units.png"
+
 ## Autor
 
 William Lopes
