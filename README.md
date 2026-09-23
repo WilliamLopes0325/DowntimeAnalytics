@@ -34,19 +34,23 @@ Versão de desenvolvimento modular.
 ## Screenshots
 
 ### Dashboard Principal
-Page_principal.png
+
+![Dashboard al.png
 
 ### Top Lines
+
 Visualização das linhas com maior tempo de downtime.
 
 TOP_LINE.png
 
 ### Top Events
+
 Principais eventos responsáveis pelas paradas de produção.
 
-![Top ENTS.png
+TOP_EVENTS.png
 
 ### Top Units
+
 Principais unidades perdidas dentro do downtime.
 
 TOP_UNITS.png
@@ -57,4 +61,4 @@ William Lopes
 
 🎓 Estudante de Engenharia de Software
 
-🔧 Técnico de Manutenção Industrial e Tecnologia.
+🔧 Técnico de Manutenção Industrial e Tecnologia
