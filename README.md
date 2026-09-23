@@ -30,3 +30,10 @@ Versão portátil para compartilhamento em rede.
 
 ### index.html
 Versão de desenvolvimento modular.
+
+Autor
+William Lopes
+
+🎓 Estudante de Engenharia de Software
+
+🔧 Técnico de Manutenção Industrial e Tecnologia.
