@@ -31,7 +31,8 @@ Versão portátil para compartilhamento em rede.
 ### index.html
 Versão de desenvolvimento modular.
 
-#Autor
+## Autor
+
 William Lopes
 
 🎓 Estudante de Engenharia de Software
