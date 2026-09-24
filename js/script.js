@@ -511,7 +511,7 @@ async function detalharLinha(linha) {
         <table class="tabelaDetalhes">
 
             <tr>
-                <th>Motivo</th>
+                <th>Reason</th>
                 <th>Downtime</th>
             </tr>
     `;
@@ -896,10 +896,10 @@ document.getElementById("detalhesUnits")
         <table class="tabelaDetalhes">
 
             <tr>
-                <th>Data</th>
+                <th>Date</th>
                 <th>Line</th>
                 <th>Downtime</th>
-                <th>SubOrigin</th>
+                <th>Reason</th>
                 <th>Commentary</th>
                 <th>Employee</th>
             </tr>
