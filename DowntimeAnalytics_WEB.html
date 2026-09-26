@@ -350,6 +350,24 @@ button{
     line-height: 1.4;
     color: white;
 }
+/* DETAILS LINE */
+
+#detalhesLinha .tabelaDetalhes th:nth-child(1),
+#detalhesLinha .tabelaDetalhes td:nth-child(1){
+    width:40%;
+    text-align:center;
+}
+
+#detalhesLinha .tabelaDetalhes th:nth-child(2),
+#detalhesLinha .tabelaDetalhes td:nth-child(2){
+    width:25%;
+    text-align:center;
+}
+
+#detalhesLinha .tabelaDetalhes th:nth-child(3),
+#detalhesLinha .tabelaDetalhes td:nth-child(3){
+    width:55%;
+}
 
 
 .card:hover{
@@ -805,127 +823,134 @@ select{
     table-layout: fixed;
 }
 
+/* Date */
 #detalhesUnits th:nth-child(1),
-#detalhesUnits td:nth-child(1) {
-    width: 10%;
+#detalhesUnits td:nth-child(1){
+    width:10%;
 }
 
+/* Hour */
 #detalhesUnits th:nth-child(2),
-#detalhesUnits td:nth-child(2) {
-    width: 8%;
-
-    text-align: center;
+#detalhesUnits td:nth-child(2){
+    width:8%;
+    text-align:center;
 }
 
+/* Model */
 #detalhesUnits th:nth-child(3),
-#detalhesUnits td:nth-child(3) {
-    width: 8%;
-
-    text-align: center;
+#detalhesUnits td:nth-child(3){
+    width:18%;
+    text-align:center;
 }
 
+/* Rate */
 #detalhesUnits th:nth-child(4),
-#detalhesUnits td:nth-child(4) {
+#detalhesUnits td:nth-child(4){
+    width:10%;
+    text-align:center;
+}
 
-    width: 14% !important;
+/* Downtime */
+#detalhesUnits th:nth-child(5),
+#detalhesUnits td:nth-child(5){
+    width:10%;
+    text-align:center;
 }
 
 /* Units */
-/* Units */
-/* Header */
-#detalhesUnits th:nth-child(5) {
-
-    width: 10%;
-
-    text-align: center;
-
-    color: #00ff9d;
+#detalhesUnits th:nth-child(6),
+#detalhesUnits td:nth-child(6){
+    width:8%;
+    text-align:center;
 }
 
-/* Valores */
-#detalhesUnits td:nth-child(5) {
+/* Commentary */
+#detalhesUnits th:nth-child(7),
+#detalhesUnits td:nth-child(7){
+    width:23%;
+}
 
-    text-align: center;
+/* Employee */
+#detalhesUnits th:nth-child(8),
+#detalhesUnits td:nth-child(8){
+    width:15%;
+}
 
-    color: #ff5c5c;
+/* Header Units */
+#detalhesUnits th:nth-child(6){
 
-    font-weight: bold;
+    text-align:center;
 
-    font-size: 20px;
+    color:#00ff9d;
+}
+
+/* Valores Units */
+#detalhesUnits td:nth-child(6){
+
+    color:#ff5c5c;
+
+    font-weight:bold;
+
+    font-size:20px;
+
+    text-align:center;
 
     text-shadow:
         0 0 8px rgba(255,0,0,.5);
 }
+#detalhesUnits td:nth-child(7){
 
-#detalhesUnits th:nth-child(6),
-#detalhesUnits td:nth-child(6) {
-    width: 30%;
+    text-align:left !important;
+
+    padding-left:5px !important;
+
+    vertical-align:middle;
 }
 
-#detalhesUnits th:nth-child(7),
-#detalhesUnits td:nth-child(7) {
-    width: 25%;
+#detalhesUnits td:nth-child(8){
+
+    text-align:center !important;
+
+    vertical-align:middle;
 }
 
-#detalhesUnits td:nth-child(6) {
-
-    text-align: center;
-
-    vertical-align: middle;
-
-    line-height: 1.6;
-}
-#detalhesUnits td:nth-child(7) {
-
-    text-align: center;
-
-    vertical-align: middle;
-}
-/* Header Commentary */
-#detalhesUnits th:nth-child(6) {
-
-    text-align: center !important;
-}
-
-/* Header Employee */
-#detalhesUnits th:nth-child(7) {
-
-    text-align: center !important;
-}
-#detalhesUnits td:nth-child(6) {
-
-    text-align: center !important;
-
-    padding-left: 0 !important;
-
-    padding-right: 0 !important;
-
-    vertical-align: middle;
-}
-
-#detalhesUnits td:nth-child(7) {
-
-    text-align: center !important;
-
-    padding-left: 0 !important;
-
-    padding-right: 0 !important;
-
-    vertical-align: middle;
-}
 #areaDashboards{
 
     max-width: 1400px;
 
     margin: 0 auto;
 }
-#detalhesUnits th:nth-child(4) {
 
-    width: 13% !important;
+#detalhesEventos th:nth-child(3),
+#detalhesEventos td:nth-child(3){
+    width:22%;
+}
 
-    padding-left: 5px !important;
+/* Downtime */
+#detalhesEventos th:nth-child(4),
+#detalhesEventos td:nth-child(4){
+    width:8%;
+}
 
-    padding-right: 5px !important;
+/* Reason */
+#detalhesEventos th:nth-child(5),
+#detalhesEventos td:nth-child(5){
+    width:18%;
+    text-align:center;
+}
+
+/* Commentary */
+#detalhesEventos th:nth-child(6),
+#detalhesEventos td:nth-child(6){
+    width:22%;
+    text-align:left;
+}
+
+/* Employee */
+#detalhesEventos th:nth-child(7),
+#detalhesEventos td:nth-child(7){
+    width:15%;
+    text-align:center;
 }
 
 
@@ -1413,32 +1438,60 @@ async function detalharLinha(linha) {
             item => item.Line === linha
         );
 
-    const ranking = {};
+const ranking = {};
 
-    linhaDados.forEach(item => {
+linhaDados.forEach(item => {
 
-        const motivo =
-            item.SubOrigin;
+    const motivo = item.SubOrigin || "-";
+    const modelo = item.Model || "-";
+    const downtime = Number(item.Downtime || 0);
 
-        const downtime =
-            Number(item.Downtime || 0);
+    if (!ranking[motivo]) {
 
-        ranking[motivo] =
-            (ranking[motivo] || 0)
-            + downtime;
-    });
+        ranking[motivo] = {
+            downtime: 0,
+            models: {}
+        };
+    }
 
-    const detalhes = Object.entries(ranking)
+    ranking[motivo].downtime += downtime;
 
-        .map(([SubOrigin, Downtime]) => ({
-            SubOrigin,
-            Downtime
-        }))
+    ranking[motivo].models[modelo] =
+        (ranking[motivo].models[modelo] || 0)
+        + downtime;
+});
 
-        .sort(
-            (a, b) =>
-                b.Downtime - a.Downtime
-        );
+const detalhes = Object.entries(ranking)
+
+.map(([SubOrigin, dados]) => {
+
+    const modelos =
+        Object.entries(dados.models)
+
+        .sort((a,b) => b[1] - a[1])
+
+        .slice(0, 3)
+
+        .map(
+            ([modelo, tempo]) =>
+            `${modelo}&nbsp; 
+            <span style="color:#ff5555;font-weight:bold;">( ${tempo} )
+            </span>`  
+        )
+
+        .join("<br>");
+
+    return {
+
+        SubOrigin,
+        Downtime: dados.downtime,
+        Models: modelos
+    };
+})
+
+.sort((a,b) =>
+    b.Downtime - a.Downtime
+);
 
     criarGraficoDetalhes(detalhes);
 
@@ -1450,6 +1503,7 @@ async function detalharLinha(linha) {
             <tr>
                 <th>Reason</th>
                 <th>Downtime</th>
+                <th>Model</th>
             </tr>
     `;
 
@@ -1458,7 +1512,12 @@ async function detalharLinha(linha) {
         html += `
             <tr>
                 <td>${item.SubOrigin}</td>
-                <td>${item.Downtime} min</td>
+                <td>
+                    <span style="color:#ff5555;font-weight:bold;">
+                    ${item.Downtime} 
+                    </span>
+                </td>
+                <td>${item.Models}</td>
             </tr>
         `;
     });
@@ -1696,6 +1755,8 @@ function gerarTop3(dados) {
             + downtime;
     });
 
+    console.log("RANKING", ranking);
+
     return Object.entries(ranking)
 
         .map(([Line, Downtime]) => ({
@@ -1703,14 +1764,9 @@ function gerarTop3(dados) {
             Downtime
         }))
 
-        .sort((a, b) => {
-
-    if (b.Ocorrencias !== a.Ocorrencias) {
-        return b.Ocorrencias - a.Ocorrencias;
-    }
-
-    return b.Downtime - a.Downtime;
-})
+        .sort((a, b) =>
+            b.Downtime - a.Downtime
+        )
 
         .slice(0, 3);
 }
@@ -1742,15 +1798,9 @@ function gerarTop3Eventos(dados) {
 
     return Object.values(ranking)
 
-.sort((a, b) => {
-
-    if (b.Ocorrencias !== a.Ocorrencias) {
-        return b.Ocorrencias - a.Ocorrencias;
-    }
-
-    return b.Downtime - a.Downtime;
-})
-
+.sort((a, b) =>
+    b.Downtime - a.Downtime
+)
         .slice(0, 3);
 }
 function criarCardsEventos(dados) {
@@ -1835,6 +1885,7 @@ document.getElementById("detalhesUnits")
             <tr>
                 <th>Date</th>
                 <th>Line</th>
+                <th>Model</th>
                 <th>Downtime</th>
                 <th>Reason</th>
                 <th>Commentary</th>
@@ -1859,7 +1910,13 @@ document.getElementById("detalhesUnits")
 
                 <td>${item.Line || "-"}</td>
 
-                <td>${item.Downtime || "-"}</td>
+                <td>${item.Model || "-"}</td>
+
+                <td>
+                    <span style="color:#ff5555;font-weight:bold;">
+                    ${item.Downtime || "-"}
+                    </span>    
+                </td>
 
                 <td>${item.SubOrigin || "-"}</td>
 
@@ -2259,6 +2316,7 @@ document.getElementById("areaGraficoDetalhes")
             <tr>
                 <th>Date</th>
                 <th>Hour</th>
+                <th>Model</th>
                 <th>Rate</th>
                 <th>Downtime</th>
                 <th>Units</th>
@@ -2284,6 +2342,11 @@ document.getElementById("areaGraficoDetalhes")
                 <td>${dataBR}</td>
 
                 <td>${item.HoraRef || "-"}</td>
+
+                <td>${(item.Model || "-")
+                    .replace("_PCBA", "")
+                    .replace("_LP4X", "")}
+                </td>
 
                 <td>${item.Rate || "-"}</td>
 
