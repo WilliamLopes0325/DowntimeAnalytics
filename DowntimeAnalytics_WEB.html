@@ -1708,14 +1708,39 @@ function filtrarPorDataETurnoEArea(
     turno,
     area
 ) {
+    // Converte os inputs do filtro salvando apenas o início e o fim do dia local
+    const inicio = new Date(`${dataInicial}T00:00:00`);
+    const fim = new Date(`${dataFinal}T23:59:59.999`);
 
-    const inicio = new Date(dataInicial);
-    const fim = new Date(dataFinal);
+    // Função interna para converter o formato "DD/MM/AAAA" da planilha
+function converterDataPlanilha(dataStr) {
+
+    if (!dataStr) return null;
+
+    const partes = dataStr.split("/");
+
+    if (partes.length !== 3) {
+        return new Date(dataStr);
+    }
+
+    const mes = partes[0];
+    const dia = partes[1];
+    const ano = partes[2];
+
+    return new Date(
+        Number(ano),
+        Number(mes) - 1,
+        Number(dia),
+        12, 0, 0
+    );
+}
 
     return dados.filter(item => {
+        // Usa a conversão correta para a coluna Date da sua planilha
+        const dataRegistro = converterDataPlanilha(item.Date);
 
-        const dataRegistro =
-            new Date(item.Date);
+        // Se a data for inválida por algum erro na planilha, ignora o item
+        if (!dataRegistro || isNaN(dataRegistro.getTime())) return false;
 
         const dentroPeriodo =
             dataRegistro >= inicio &&
@@ -1739,6 +1764,7 @@ function filtrarPorDataETurnoEArea(
         );
     });
 }
+
 function gerarTop3(dados) {
 
     const ranking = {};
@@ -1754,8 +1780,6 @@ function gerarTop3(dados) {
             (ranking[linha] || 0)
             + downtime;
     });
-
-    console.log("RANKING", ranking);
 
     return Object.entries(ranking)
 
