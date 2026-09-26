@@ -1,4 +1,4 @@
-console.log("SCRIPT CARREGADO");
+   console.log("SCRIPT CARREGADO");
 
 let grafico = null;
 
@@ -476,32 +476,60 @@ async function detalharLinha(linha) {
             item => item.Line === linha
         );
 
-    const ranking = {};
+const ranking = {};
 
-    linhaDados.forEach(item => {
+linhaDados.forEach(item => {
 
-        const motivo =
-            item.SubOrigin;
+    const motivo = item.SubOrigin || "-";
+    const modelo = item.Model || "-";
+    const downtime = Number(item.Downtime || 0);
 
-        const downtime =
-            Number(item.Downtime || 0);
+    if (!ranking[motivo]) {
 
-        ranking[motivo] =
-            (ranking[motivo] || 0)
-            + downtime;
-    });
+        ranking[motivo] = {
+            downtime: 0,
+            models: {}
+        };
+    }
 
-    const detalhes = Object.entries(ranking)
+    ranking[motivo].downtime += downtime;
 
-        .map(([SubOrigin, Downtime]) => ({
-            SubOrigin,
-            Downtime
-        }))
+    ranking[motivo].models[modelo] =
+        (ranking[motivo].models[modelo] || 0)
+        + downtime;
+});
 
-        .sort(
-            (a, b) =>
-                b.Downtime - a.Downtime
-        );
+const detalhes = Object.entries(ranking)
+
+.map(([SubOrigin, dados]) => {
+
+    const modelos =
+        Object.entries(dados.models)
+
+        .sort((a,b) => b[1] - a[1])
+
+        .slice(0, 3)
+
+        .map(
+            ([modelo, tempo]) =>
+            `${modelo}&nbsp; 
+            <span style="color:#ff5555;font-weight:bold;">( ${tempo} )
+            </span>`  
+        )
+
+        .join("<br>");
+
+    return {
+
+        SubOrigin,
+        Downtime: dados.downtime,
+        Models: modelos
+    };
+})
+
+.sort((a,b) =>
+    b.Downtime - a.Downtime
+);
 
     criarGraficoDetalhes(detalhes);
 
@@ -513,6 +541,7 @@ async function detalharLinha(linha) {
             <tr>
                 <th>Reason</th>
                 <th>Downtime</th>
+                <th>Model</th>
             </tr>
     `;
 
@@ -521,7 +550,12 @@ async function detalharLinha(linha) {
         html += `
             <tr>
                 <td>${item.SubOrigin}</td>
-                <td>${item.Downtime} min</td>
+                <td>
+                    <span style="color:#ff5555;font-weight:bold;">
+                    ${item.Downtime} 
+                    </span>
+                </td>
+                <td>${item.Models}</td>
             </tr>
         `;
     });
@@ -759,6 +793,8 @@ function gerarTop3(dados) {
             + downtime;
     });
 
+    console.log("RANKING", ranking);
+
     return Object.entries(ranking)
 
         .map(([Line, Downtime]) => ({
@@ -766,14 +802,9 @@ function gerarTop3(dados) {
             Downtime
         }))
 
-        .sort((a, b) => {
-
-    if (b.Ocorrencias !== a.Ocorrencias) {
-        return b.Ocorrencias - a.Ocorrencias;
-    }
-
-    return b.Downtime - a.Downtime;
-})
+        .sort((a, b) =>
+            b.Downtime - a.Downtime
+        )
 
         .slice(0, 3);
 }
@@ -805,15 +836,9 @@ function gerarTop3Eventos(dados) {
 
     return Object.values(ranking)
 
-.sort((a, b) => {
-
-    if (b.Ocorrencias !== a.Ocorrencias) {
-        return b.Ocorrencias - a.Ocorrencias;
-    }
-
-    return b.Downtime - a.Downtime;
-})
-
+.sort((a, b) =>
+    b.Downtime - a.Downtime
+)
         .slice(0, 3);
 }
 function criarCardsEventos(dados) {
@@ -898,6 +923,7 @@ document.getElementById("detalhesUnits")
             <tr>
                 <th>Date</th>
                 <th>Line</th>
+                <th>Model</th>
                 <th>Downtime</th>
                 <th>Reason</th>
                 <th>Commentary</th>
@@ -922,7 +948,13 @@ document.getElementById("detalhesUnits")
 
                 <td>${item.Line || "-"}</td>
 
-                <td>${item.Downtime || "-"}</td>
+                <td>${item.Model || "-"}</td>
+
+                <td>
+                    <span style="color:#ff5555;font-weight:bold;">
+                    ${item.Downtime || "-"}
+                    </span>    
+                </td>
 
                 <td>${item.SubOrigin || "-"}</td>
 
@@ -1322,6 +1354,7 @@ document.getElementById("areaGraficoDetalhes")
             <tr>
                 <th>Date</th>
                 <th>Hour</th>
+                <th>Model</th>
                 <th>Rate</th>
                 <th>Downtime</th>
                 <th>Units</th>
@@ -1347,6 +1380,11 @@ document.getElementById("areaGraficoDetalhes")
                 <td>${dataBR}</td>
 
                 <td>${item.HoraRef || "-"}</td>
+
+                <td>${(item.Model || "-")
+                    .replace("_PCBA", "")
+                    .replace("_LP4X", "")}
+                </td>
 
                 <td>${item.Rate || "-"}</td>
 

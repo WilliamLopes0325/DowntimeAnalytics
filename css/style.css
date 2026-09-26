@@ -1,4 +1,4 @@
-body{
+ body{
 
     margin:0;
 
@@ -11,7 +11,7 @@ body{
             rgba(0,0,0,0.55),
             rgba(0,0,0,0.55)
         ),
-        url("../img/background.png");
+        url("img/background.png");
 
     background-size:cover;
 
@@ -83,12 +83,24 @@ header h1{
         0 0 20px #00d4ff;
 }
 .container{
-    padding:30px;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 20px;
 }
 
 .filtros{
+
     display:flex;
+
+    align-items:center;
+
     gap:15px;
+
+    margin-top:20px; /* novo */
+
     margin-bottom:30px;
 }
 .cards{
@@ -327,6 +339,24 @@ button{
     font-size: 18px;
     line-height: 1.4;
     color: white;
+}
+/* DETAILS LINE */
+
+#detalhesLinha .tabelaDetalhes th:nth-child(1),
+#detalhesLinha .tabelaDetalhes td:nth-child(1){
+    width:40%;
+    text-align:center;
+}
+
+#detalhesLinha .tabelaDetalhes th:nth-child(2),
+#detalhesLinha .tabelaDetalhes td:nth-child(2){
+    width:25%;
+    text-align:center;
+}
+
+#detalhesLinha .tabelaDetalhes th:nth-child(3),
+#detalhesLinha .tabelaDetalhes td:nth-child(3){
+    width:55%;
 }
 
 
@@ -783,110 +813,132 @@ select{
     table-layout: fixed;
 }
 
+/* Date */
 #detalhesUnits th:nth-child(1),
-#detalhesUnits td:nth-child(1) {
-    width: 10%;
+#detalhesUnits td:nth-child(1){
+    width:10%;
 }
 
+/* Hour */
 #detalhesUnits th:nth-child(2),
-#detalhesUnits td:nth-child(2) {
-    width: 8%;
-
-    text-align: center;
+#detalhesUnits td:nth-child(2){
+    width:8%;
+    text-align:center;
 }
 
+/* Model */
 #detalhesUnits th:nth-child(3),
-#detalhesUnits td:nth-child(3) {
-    width: 8%;
-
-    text-align: center;
+#detalhesUnits td:nth-child(3){
+    width:18%;
+    text-align:center;
 }
 
+/* Rate */
 #detalhesUnits th:nth-child(4),
-#detalhesUnits td:nth-child(4) {
-    width: 8%;
+#detalhesUnits td:nth-child(4){
+    width:10%;
+    text-align:center;
+}
 
-    text-align: center;
+/* Downtime */
+#detalhesUnits th:nth-child(5),
+#detalhesUnits td:nth-child(5){
+    width:10%;
+    text-align:center;
 }
 
 /* Units */
-#detalhesUnits th:nth-child(5) {
-
-    width: 10%;
-
-    text-align: center;
-
-    color: #00ff9d;
+#detalhesUnits th:nth-child(6),
+#detalhesUnits td:nth-child(6){
+    width:8%;
+    text-align:center;
 }
 
-/* Valores */
-#detalhesUnits td:nth-child(5) {
+/* Commentary */
+#detalhesUnits th:nth-child(7),
+#detalhesUnits td:nth-child(7){
+    width:23%;
+}
 
-    text-align: center;
+/* Employee */
+#detalhesUnits th:nth-child(8),
+#detalhesUnits td:nth-child(8){
+    width:15%;
+}
 
-    color: #ff5c5c;
+/* Header Units */
+#detalhesUnits th:nth-child(6){
 
-    font-weight: bold;
+    text-align:center;
 
-    font-size: 20px;
+    color:#00ff9d;
+}
+
+/* Valores Units */
+#detalhesUnits td:nth-child(6){
+
+    color:#ff5c5c;
+
+    font-weight:bold;
+
+    font-size:20px;
+
+    text-align:center;
 
     text-shadow:
         0 0 8px rgba(255,0,0,.5);
 }
+#detalhesUnits td:nth-child(7){
 
-#detalhesUnits th:nth-child(6),
-#detalhesUnits td:nth-child(6) {
-    width: 30%;
+    text-align:left !important;
+
+    padding-left:5px !important;
+
+    vertical-align:middle;
 }
 
-#detalhesUnits th:nth-child(7),
-#detalhesUnits td:nth-child(7) {
-    width: 25%;
+#detalhesUnits td:nth-child(8){
+
+    text-align:center !important;
+
+    vertical-align:middle;
 }
 
-#detalhesUnits td:nth-child(6) {
+#areaDashboards{
 
-    text-align: center;
+    max-width: 1400px;
 
-    vertical-align: middle;
-
-    line-height: 1.6;
-}
-#detalhesUnits td:nth-child(7) {
-
-    text-align: center;
-
-    vertical-align: middle;
-}
-/* Header Commentary */
-#detalhesUnits th:nth-child(6) {
-
-    text-align: center !important;
+    margin: 0 auto;
 }
 
-/* Header Employee */
-#detalhesUnits th:nth-child(7) {
-
-    text-align: center !important;
-}
-#detalhesUnits td:nth-child(6) {
-
-    text-align: center !important;
-
-    padding-left: 0 !important;
-
-    padding-right: 0 !important;
-
-    vertical-align: middle;
+#detalhesEventos th:nth-child(3),
+#detalhesEventos td:nth-child(3){
+    width:22%;
 }
 
-#detalhesUnits td:nth-child(7) {
+/* Downtime */
+#detalhesEventos th:nth-child(4),
+#detalhesEventos td:nth-child(4){
+    width:8%;
+}
 
-    text-align: center !important;
+/* Reason */
+#detalhesEventos th:nth-child(5),
+#detalhesEventos td:nth-child(5){
+    width:18%;
+    text-align:center;
+}
 
-    padding-left: 0 !important;
+/* Commentary */
+#detalhesEventos th:nth-child(6),
+#detalhesEventos td:nth-child(6){
+    width:22%;
+    text-align:left;
+}
 
-    padding-right: 0 !important;
-
-    vertical-align: middle;
+/* Employee */
+#detalhesEventos th:nth-child(7),
+#detalhesEventos td:nth-child(7){
+    width:15%;
+    text-align:center;
 }
